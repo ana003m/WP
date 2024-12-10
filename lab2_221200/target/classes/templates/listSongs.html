@@ -1,0 +1,55 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Songs Homepage - Welcome to My Music Store</title>
+</head>
+<body>
+<header>
+    <h1>Welcome to My Music Store</h1>
+
+<!--    <form th:action="@{/songs}" th:method="get">-->
+<!--        <input type="text" th:name="search">-->
+<!--        <input type="submit" value="Search"></input>-->
+<!--    </form>-->
+
+
+</header>
+<main>
+    <h2>Choose a song:</h2>
+    <form th:method="POST" th:action="@{/artist}">
+
+        <div th:each="song : ${songList}">
+            Title: <th:block th:text="${song.getTitle()}"></th:block>
+            (Album: <th:block th:text="${song.getAlbum().getName()}"></th:block>)<br>
+            Genre: <th:block th:text="${song.getGenre()}"></th:block><br>
+            Release Year: <th:block th:text="${song.getReleaseYear()}"></th:block><br>
+
+            <input type="radio" name="songRadio"  th:value="${song.getId()}">
+
+
+            <a th:href="@{/songs/edit-form/{id}(id=${song.id})}">
+                <button type="button">Edit song</button>
+            </a>
+
+            <a th:href="@{/songs/delete/{id}(id=${song.id})}">
+                <button type="button">Delete song</button>
+            </a>
+
+            <br/>
+            <br/>
+        </div>
+        <input type='submit' value='Submit'>
+    </form>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <a th:href="@{/songs/add-form}">
+        <button type="button">Add new song</button>
+    </a>
+
+</main>
+</body>
+</html>
